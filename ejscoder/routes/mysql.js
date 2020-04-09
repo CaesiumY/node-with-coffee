@@ -1,16 +1,10 @@
 var express = require("express");
 var router = express.Router();
-var mysql = require("mysql");
+var mysql_odbc = require("../db/db_conn");
+var conn = mysql_odbc.init();
 
 router.get("/", (req, res, next) => {
-  var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "gocodermysql",
-    database: "nodedb",
-    // 예시용 mysql 정보
-  });
+  var connection = conn;
 
   connection.connect((err) => {
     if (err) {
