@@ -1,9 +1,9 @@
 var mysql = require("mysql");
 var config = require("./db_info").local;
 
-module.exports = () => {
+module.exports = function () {
   return {
-    init: () => {
+    init: function () {
       return mysql.createConnection({
         host: config.host,
         port: config.port,

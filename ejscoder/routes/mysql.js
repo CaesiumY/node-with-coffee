@@ -1,10 +1,16 @@
 var express = require("express");
+var mysql = require("mysql");
+var config = require("../db/db_info").local;
 var router = express.Router();
-var mysql_odbc = require("../db/db_conn");
-var conn = mysql_odbc.init();
 
 router.get("/", (req, res, next) => {
-  var connection = conn;
+  var connection = mysql.createConnection({
+    host: config.host,
+    port: config.port,
+    user: config.user,
+    password: config.password,
+    database: config.database,
+  });
 
   connection.connect((err) => {
     if (err) {
