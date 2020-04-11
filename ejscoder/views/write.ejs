@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <h1><%=title%></h1>
+
+    <form action="/board/write" method="post">
+      <table border="1">
+        <tr>
+          <td>작성자</td>
+          <td><input type="text" name="name" id="name" /></td>
+        </tr>
+        <tr>
+          <td>제목</td>
+          <td><input type="text" name="title" id="title" /></td>
+        </tr>
+        <tr>
+          <td>내용</td>
+          <td>
+            <textarea
+              cols="30"
+              rows="10"
+              type="text"
+              name="content"
+              id="content"
+            ></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>패스워드</td>
+          <td><input type="password" name="password" id="password" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button type="submit">글쓰기</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
