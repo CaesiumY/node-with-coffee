@@ -11,7 +11,7 @@ router.get("/list/:page", (req, res, next) => {
   var page = req.params.page;
 
   var sql =
-    "select idx, name, title, date_format(modidate, '%Y-%m-%d %H:%i:%s') modidate, " +
+    "select idx, name, title, hit, date_format(modidate, '%Y-%m-%d %H:%i:%s') modidate, " +
     "date_format(regdate, '%Y-%m-%d %H:%i:%s') regdate from board";
 
   conn.query(sql, (err, rows) => {
@@ -36,6 +36,20 @@ router.post("/write", (req, res, next) => {
   conn.query(sql, datas, (err, rows) => {
     if (err) console.log("err", err);
     res.redirect("/board/list");
+  });
+});
+
+router.get("/read/:idx", (req, res, next) => {
+  var idx = req.params.idx;
+
+  var sql =
+    "select idx, name, title, content, hit, date_format(modidate, '%Y-%m-%d %H:%i:%s') modidate, " +
+    "date_format(regdate, '%Y-%m-%d %H:%i:%s') regdate from board where idx=?";
+
+  conn.query(sql, [idx], (err, row) => {
+    console.log("row", row);
+    if (err) console.log("err", err);
+    res.render("read", { title: "글 상세", row: row[0] });
   });
 });
 module.exports = router;
