@@ -95,4 +95,26 @@ router.post("/delete", (req, res, next) => {
   });
 });
 
+router.get("/page/:page", (req, res, next) => {
+  var page = req.params.page;
+
+  var sql =
+    "select idx, name, title, hit, date_format(modidate, '%Y-%m-%d %H:%i:%s') modidate, " +
+    "date_format(regdate, '%Y-%m-%d %H:%i:%s') regdate from board";
+
+  conn.query(sql, (err, rows) => {
+    if (err) console.log("err", err);
+
+    res.render("page", {
+      title: "게시판 리스트 페이징",
+      rows,
+      page,
+      length: rows.length - 1,
+      page_num: 10,
+      pass: true,
+    });
+    console.log(rows.length - 1);
+  });
+});
+
 module.exports = router;
