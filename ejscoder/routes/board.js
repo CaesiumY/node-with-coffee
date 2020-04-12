@@ -52,4 +52,27 @@ router.get("/read/:idx", (req, res, next) => {
     res.render("read", { title: "글 상세", row: row[0] });
   });
 });
+
+router.post("/update", (req, res, next) => {
+  var idx = parseInt(req.body.idx);
+  var name = req.body.name;
+  var title = req.body.title;
+  var content = req.body.content;
+  var passwd = req.body.passwd;
+  var datas = [name, title, content, idx, passwd];
+
+  var sql =
+    "update board set name=?, title=?, content=?, modidate=now() where idx=? and passwd=?";
+  conn.query(sql, datas, (err, result) => {
+    if (err) console.log("err", err);
+    if (result.affectedRows == 0) {
+      res.send(
+        '<script>alert("패스워드가 일치하지 않습니다"); history.back(); </script>'
+      );
+    } else {
+      res.redirect("/board/read/" + idx);
+    }
+  });
+});
+
 module.exports = router;

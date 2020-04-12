@@ -10,7 +10,7 @@
 
     <form action="/board/update" method="post">
       <table border="1">
-        <input type="hidden" name="idx" value="<%=row.name%>" />
+        <input type="hidden" name="idx" value="<%=row.idx%>" />
         <tr>
           <td>작성자</td>
           <td>
@@ -39,8 +39,8 @@
           <td>내용</td>
           <td>
             <textarea name="content" id="content" cols="30" rows="10" required>
-<%=row.content%>
-            </textarea>
+<%=row.content%></textarea
+            >
           </td>
         </tr>
         <tr>
